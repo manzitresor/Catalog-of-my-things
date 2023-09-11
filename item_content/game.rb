@@ -1,23 +1,18 @@
 require_relative 'item'
 
 class Game < Item
-    attr_accessor :multiplayer, :last_played_at, :author, :genre, :source, :label
-    @game_list = []
-    def initialize(multiplayer, last_played_at)
-        @multiplayer = multiplayer
-        @last_played_at = last_played_at
-        self.class.game_list << self
-    end
+  attr_accessor :multiplayer, :last_played_at, :author, :genre, :source, :label
 
-    private
-    def can_be_archived?
-        self.class.can_be_archived? == true && @last_played_at > 2 ? true : false
-    end
+  @game_list = []
+  def initialize(multiplayer, last_played_at)
+    super
+    @multiplayer = multiplayer
+    @last_played_at = last_played_at
+    self.class.game_list << self
+  end
 
-    public
 
-    class << self
-      attr_accessor :game_list
-    end
-
+  class << self
+    attr_accessor :game_list
+  end
 end

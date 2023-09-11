@@ -11,7 +11,6 @@ class Game < Item
     self.class.game_list << self
   end
 
-
   class << self
     attr_accessor :game_list
   end

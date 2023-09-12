@@ -11,6 +11,12 @@ class Game < Item
     self.class.game_list << self
   end
 
+  private
+
+  def can_be_archived?
+    self.class.can_be_archived? && @last_played_at > 2
+  end
+
   class << self
     attr_accessor :game_list
   end

@@ -54,7 +54,6 @@ class App
   end
 
   def exit_app
-    FileWriter.write_file
     puts 'Goodbye'
     exit
   end

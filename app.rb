@@ -3,6 +3,7 @@ require 'json'
 class App
   def initialize
     @books = []
+    @labels = []
   end
 
   def list_all_books
@@ -24,14 +25,24 @@ class App
   end
 
   def add_a_book
-    print "Publisher: "
+    print 'Publisher: '
     publisher = gets.chomp
-    print "Cover state: "
+    print 'Cover state: '
     cover_state = gets.chomp
-    book = Book.new(publisher,cover_state)
+    puts 'Create a New Label'
+    add_label
+    book = Book.new(publisher, cover_state)
     @books.push(book)
-    puts ""
-    puts "Book created successfullly"
+    puts 'Book created successfullly'
+  end
+
+  def add_label
+    print 'Title: '
+    title = gets.chomp
+    print 'Color: '
+    color = gets.chomp
+    label = Label.new(title, color)
+    @labels.push(label)
   end
 
   def add_a_music_album
@@ -51,7 +62,9 @@ class App
   end
 
   def list_all_labels
-    puts 'empty method'
+    @labels.each do |label|
+      puts "Title: #{label.title}, Color: #{label.color}"
+    end
   end
 
   def list_all_authors

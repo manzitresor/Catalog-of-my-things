@@ -39,9 +39,8 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/MethodLength
 def prompter
-  puts " "
+  puts ' '
   puts 'Welcome to Catalog App!'
-  puts ""
   puts 'Please choose an option by entering a number:'
   puts '1 - list all books'
   puts '2 - list all music album'

@@ -2,11 +2,13 @@ require_relative 'app_helper'
 require 'json'
 class App
   def initialize
-    puts 'empty method'
+    @books = []
   end
 
   def list_all_books
-    puts 'empty method'
+    @books.each do |book|
+      puts "Pubisher: #{book.publisher}, Cover State: #{book.cover_state}"
+    end
   end
 
   def list_all_music_album
@@ -22,7 +24,14 @@ class App
   end
 
   def add_a_book
-    puts 'empty method'
+    print "Publisher: "
+    publisher = gets.chomp
+    print "Cover state: "
+    cover_state = gets.chomp
+    book = Book.new(publisher,cover_state)
+    @books.push(book)
+    puts ""
+    puts "Book created successfullly"
   end
 
   def add_a_music_album

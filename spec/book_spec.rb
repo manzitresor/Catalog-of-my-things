@@ -11,7 +11,7 @@ describe Book do
   end
   describe '#can_be_archived?' do
     it 'when cover state is bad, it should return true' do
-      result = @book.send(:can_be_archived?) # Call the private method using send
+      result = @book.send(:can_be_archived?)
       expect(result).to be(true)
     end
   end

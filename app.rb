@@ -4,8 +4,8 @@ class App
   def initialize
     @books = []
     @labels = []
-    @music_albums = []
-    @genres = []
+    @authors = []
+    @games = []
   end
 
   def display_data
@@ -18,6 +18,16 @@ class App
     labels.each do |label|
       @labels.push(Label.new(label['title'], label['color']))
     end
+
+    # Display authors and games
+    authors = FileReader.new('./data/authors.json').read
+    games = FileReader.new('./data/games.json').read
+    games.each do |game|
+      @games.push(Game.new(game['multiplayer'], game['last_played_at']))
+    end
+    authors.each do |author|
+      @authors.push(Author.new(author['first_name'], author['last_name']))
+    end
   end
 
   def preserve_data
@@ -25,6 +35,11 @@ class App
     labels = @labels.map { |label| { title: label.title, color: label.color } }
     FileWriter.new('./data/books.json').write(books)
     FileWriter.new('./data/labels.json').write(labels)
+    # preserve author and game data
+    games = @games.map { |game| { multiplayer: game.multiplayer, last_played_at: game.last_played_at } }
+    authors = @authors.map { |author| { first_name: author.first_name, last_name: author.last_name } }
+    FileWriter.new('./data/authors.json').write(authors)
+    FileWriter.new('./data/games.json').write(games)
   end
 
   def list_all_books
@@ -45,7 +60,9 @@ class App
   end
 
   def list_all_games
-    puts 'empty method'
+    @games.each do |game|
+      puts "Multiplayer?: #{game.multiplayer}, Last Played At: #{game.last_played_at}"
+    end
   end
 
   def add_a_book
@@ -101,7 +118,24 @@ class App
   end
 
   def add_a_game
-    puts 'empty method'
+    print 'Is the game a multiplayer game? (yes or no):'
+    input = gets.chomp
+    multiplayer = input.downcase == 'yes'
+    print 'Last played at:'
+    last_played_at = gets.chomp.to_i
+    add_author
+    game = Game.new(multiplayer, last_played_at)
+    @games.push(game)
+    puts 'Game created successfullly'
+  end
+
+  def add_author
+    print 'First Name: '
+    first_name = gets.chomp
+    print 'Last Name: '
+    last_name = gets.chomp
+    author = Author.new(first_name, last_name)
+    @authors.push(author)
   end
 
   def list_all_genres
@@ -118,7 +152,9 @@ class App
   end
 
   def list_all_authors
-    puts 'empty method'
+    @authors.each do |author|
+      puts "First Name: #{author.first_name}, Last Name: #{author.last_name}"
+    end
   end
 
   def list_all_sources

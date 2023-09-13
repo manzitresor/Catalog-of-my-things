@@ -1,6 +1,6 @@
 require 'json'
 class Author
-  attr_accessor :first_name, :last_name
+  attr_accessor :first_name, :last_name, :items
 
   def initialize(first_name, last_name)
     @id = rand(1..1000)
@@ -10,7 +10,6 @@ class Author
   end
 
   def add_item(item)
-    item.author = self
-    @items << item
+    @items << item unless @items.include?(item)
   end
 end

@@ -4,6 +4,8 @@ class App
   def initialize
     @books = []
     @labels = []
+    @music_albums = []
+    @genres = []
   end
 
   def display_data
@@ -32,7 +34,10 @@ class App
   end
 
   def list_all_music_album
-    puts 'empty method'
+    puts "List of All Music Albums: \n"
+    @music_albums.each do |music|
+      puts "ID: #{music.id}, title: #{music.title}, author: #{music.author}, Is it on Spotify: #{music.on_spotify}"
+    end
   end
 
   def list_all_movies
@@ -65,7 +70,30 @@ class App
   end
 
   def add_a_music_album
-    puts 'empty method'
+    print 'Enter music album title: '
+    title = gets.chomp
+
+    print 'Enter music album artist: '
+    artist = gets.chomp
+
+    print 'Enter music album release date (YYYY-MM-DD): '
+    release_date_str = gets.chomp
+    release_date = Date.parse(release_date_str)
+
+    print 'Is it on Spotify? (true/false): '
+    on_spotify = gets.chomp.downcase == 'true'
+    add_genre
+    music_album = MusicAlbum.new(release_date, on_spotify, title, artist)
+    @music_albums << music_album
+    puts 'Music album added successfully!'
+  end
+
+  def add_genre
+    print 'Enter music album genre: '
+    genre_name = gets.chomp
+
+    genre_data = Genre.new(genre_name)
+    @genres << genre_data
   end
 
   def add_a_movie
@@ -77,7 +105,10 @@ class App
   end
 
   def list_all_genres
-    puts 'empty method'
+    puts "List of Genres: \n"
+    @genres.each do |genre|
+      puts "ID: #{genre.id}, name: #{genre.name}"
+    end
   end
 
   def list_all_labels

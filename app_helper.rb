@@ -6,4 +6,3 @@ require_relative 'data_preserver'
 require_relative 'item_content/musicalbum'
 require_relative 'item_content/game'
 require_relative 'properties/author'
-

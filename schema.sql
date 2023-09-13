@@ -1,0 +1,11 @@
+CREATE TABLE Book(
+publisher VARCHAR(50),
+cover_state VARCHAR(50)
+);
+
+CREATE TABLE Label(
+id INT GENERATED ALWAYS AS IDENTITY,
+title VARCHAR(50),
+color VARCHAR(50)
+PRIMARY KEY(id)
+);

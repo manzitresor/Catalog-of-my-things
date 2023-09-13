@@ -3,8 +3,8 @@ require_relative '../app_helper'
 class Label < Item
   attr_accessor :title, :color, :items
 
-  def initialize(_id, title, color, _items)
-    super()
+  def initialize(title, color)
+    super(publish_date)
     @id = Random.rand(1..1000)
     @title = title
     @color = color

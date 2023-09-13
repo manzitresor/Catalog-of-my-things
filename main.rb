@@ -3,7 +3,6 @@ require_relative 'app'
 # rubocop:disable Metrics/MethodLength
 def main
   app = App.new
-  puts 'app created'
   response = nil
   while response != '13'
     response = prompter
@@ -40,7 +39,8 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/MethodLength
 def prompter
-  puts 'Welcome to Catalog App!\n\n'
+  puts ' '
+  puts 'Welcome to Catalog App!'
   puts 'Please choose an option by entering a number:'
   puts '1 - list all books'
   puts '2 - list all music album'

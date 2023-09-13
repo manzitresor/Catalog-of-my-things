@@ -11,7 +11,7 @@ class App
   def display_data
     books = FileReader.new('./data/books.json').read
     labels = FileReader.new('./data/labels.json').read
-    
+
     books.each do |book|
       @books.push(Book.new(book['publisher'], book['cover_state']))
     end
@@ -19,7 +19,7 @@ class App
       @labels.push(Label.new(label['title'], label['color']))
     end
 
-#Display authors and games
+    # Display authors and games
     authors = FileReader.new('./data/authors.json').read
     games = FileReader.new('./data/games.json').read
     games.each do |game|
@@ -35,7 +35,7 @@ class App
     labels = @labels.map { |label| { title: label.title, color: label.color } }
     FileWriter.new('./data/books.json').write(books)
     FileWriter.new('./data/labels.json').write(labels)
-#preserve author and game data
+    # preserve author and game data
     games = @games.map { |game| { multiplayer: game.multiplayer, last_played_at: game.last_played_at } }
     authors = @authors.map { |author| { first_name: author.first_name, last_name: author.last_name } }
     FileWriter.new('./data/authors.json').write(authors)
@@ -94,7 +94,7 @@ class App
   def add_a_game
     print 'Is the game a multiplayer game? (yes or no):'
     input = gets.chomp
-    multiplayer = input.downcase == 'yes' ? true : false
+    multiplayer = input.downcase == 'yes'
     print 'Last played at:'
     last_played_at = gets.chomp.to_i
     add_author

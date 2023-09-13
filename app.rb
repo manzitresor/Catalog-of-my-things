@@ -6,6 +6,8 @@ class App
     @labels = []
     @authors = []
     @games = []
+    @music_albums = []
+    @genres = []
   end
 
   def display_data
@@ -28,6 +30,16 @@ class App
     authors.each do |author|
       @authors.push(Author.new(author['first_name'], author['last_name']))
     end
+
+    # Display musicalbun and genre
+    musicalbum = FileReader.new('./data/musicalbum.json').read
+    genre_data = FileReader.new('./data/genre.json').read
+    musicalbum.each do |music|
+      @music_albums.push(MusicAlbum.new(music['publish_date'], music['on_spotify'],music['title'],music['artist']))
+    end
+    genre_data.each do |genre|
+      @genres.push(Genre.new(genre['name']))
+    end
   end
 
   def preserve_data
@@ -40,6 +52,12 @@ class App
     authors = @authors.map { |author| { first_name: author.first_name, last_name: author.last_name } }
     FileWriter.new('./data/authors.json').write(authors)
     FileWriter.new('./data/games.json').write(games)
+
+    #preserve musicAlbum and genre data
+    music_album = @music_albums.map { |music| {publish_date: music.publish_date, on_spotify: music.on_spotify, title: music.title, artist: music.artist} }
+    genre = @genres.map { |genre| { id: genre.id, name: genre.name } }
+    FileWriter.new('./data/musicalbum.json').write(music_album)
+    FileWriter.new('./data/genre.json').write(genre)
   end
 
   def list_all_books

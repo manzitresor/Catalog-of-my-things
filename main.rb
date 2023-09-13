@@ -3,6 +3,7 @@ require_relative 'app'
 # rubocop:disable Metrics/MethodLength
 def main
   app = App.new
+  app.display_data
   response = nil
   while response != '13'
     response = prompter

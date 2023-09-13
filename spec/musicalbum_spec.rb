@@ -1,5 +1,4 @@
-
-require_relative '../item_content/musicalbum' 
+require_relative '../item_content/musicalbum'
 
 RSpec.describe MusicAlbum do
   describe '#initialize' do

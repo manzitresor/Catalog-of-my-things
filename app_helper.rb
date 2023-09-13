@@ -4,4 +4,3 @@ require_relative 'properties/label'
 require_relative 'item_content/genre'
 require_relative 'item_content/game'
 require_relative 'properties/author'
-

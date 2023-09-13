@@ -6,6 +6,25 @@ class App
     @labels = []
   end
 
+  def display_data
+    books = FileReader.new('./data/books.json').read
+    labels = FileReader.new('./data/labels.json').read
+
+    books.each do |book|
+      @books.push(Book.new(book['publisher'], book['cover_state']))
+    end
+    labels.each do |label|
+      @labels.push(Label.new(label['title'], label['color']))
+    end
+  end
+
+  def preserve_data
+    books = @books.map { |book| { publisher: book.publisher, cover_state: book.cover_state } }
+    labels = @labels.map { |label| { title: label.title, color: label.color } }
+    FileWriter.new('./data/books.json').write(books)
+    FileWriter.new('./data/labels.json').write(labels)
+  end
+
   def list_all_books
     @books.each do |book|
       puts "Pubisher: #{book.publisher}, Cover State: #{book.cover_state}"
@@ -77,6 +96,7 @@ class App
 
   def exit_app
     puts 'Goodbye'
+    preserve_data
     exit
   end
 end

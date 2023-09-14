@@ -6,20 +6,20 @@ class App
     @labels = []
     @authors = []
     @games = []
+    @music_albums = []
+    @genres = []
   end
 
+  # rubocop:disable Metrics/MethodLength
   def display_data
     books = FileReader.new('./data/books.json').read
     labels = FileReader.new('./data/labels.json').read
-
     books.each do |book|
       @books.push(Book.new(book['publisher'], book['cover_state']))
     end
     labels.each do |label|
       @labels.push(Label.new(label['title'], label['color']))
     end
-
-    # Display authors and games
     authors = FileReader.new('./data/authors.json').read
     games = FileReader.new('./data/games.json').read
     games.each do |game|
@@ -28,14 +28,22 @@ class App
     authors.each do |author|
       @authors.push(Author.new(author['first_name'], author['last_name']))
     end
+    musicalbum = FileReader.new('./data/musicalbum.json').read
+    genre_data = FileReader.new('./data/genre.json').read
+    musicalbum.each do |music|
+      @music_albums.push(MusicAlbum.new(music['publish_date'], music['on_spotify'], music['title'], music['artist']))
+    end
+    genre_data.each do |genre|
+      @genres.push(Genre.new(genre['name']))
+    end
   end
 
+  # rubocop:enable Metrics/MethodLength
   def preserve_data
     books = @books.map { |book| { publisher: book.publisher, cover_state: book.cover_state } }
     labels = @labels.map { |label| { title: label.title, color: label.color } }
     FileWriter.new('./data/books.json').write(books)
     FileWriter.new('./data/labels.json').write(labels)
-    # preserve author and game data
     games = @games.map { |game| { multiplayer: game.multiplayer, last_played_at: game.last_played_at } }
     authors = @authors.map { |author| { first_name: author.first_name, last_name: author.last_name } }
     FileWriter.new('./data/authors.json').write(authors)

@@ -63,10 +63,6 @@ class App
     end
   end
 
-  def list_all_movies
-    puts 'empty method'
-  end
-
   def list_all_games
     @games.each do |game|
       puts "Multiplayer?: #{game.multiplayer}, Last Played At: #{game.last_played_at}"
@@ -121,10 +117,6 @@ class App
     @genres << genre_data
   end
 
-  def add_a_movie
-    puts 'empty method'
-  end
-
   def add_a_game
     print 'Is the game a multiplayer game? (yes or no):'
     input = gets.chomp
@@ -163,10 +155,6 @@ class App
     @authors.each do |author|
       puts "First Name: #{author.first_name}, Last Name: #{author.last_name}"
     end
-  end
-
-  def list_all_sources
-    puts 'empty method'
   end
 
   def exit_app

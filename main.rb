@@ -13,26 +13,20 @@ def main
     when '2'
       app.list_all_music_album
     when '3'
-      app.list_all_movies
-    when '4'
       app.list_all_games
-    when '5'
+    when '4'
       app.list_all_genres
-    when '6'
+    when '5'
       app.list_all_labels
-    when '7'
+    when '6'
       app.list_all_authors
-    when '8'
-      app.list_all_sources
-    when '9'
+    when '7'
       app.add_a_book
-    when '10'
+    when '8'
       app.add_a_music_album
-    when '11'
-      app.add_a_movie
-    when '12'
+    when '9'
       app.add_a_game
-    when '13' then app.exit_app
+    when '10' then app.exit_app
     end
   end
 end
@@ -45,17 +39,14 @@ def prompter
   puts 'Please choose an option by entering a number:'
   puts '1 - list all books'
   puts '2 - list all music album'
-  puts '3 - list all movies'
-  puts '4 - list all games'
-  puts '5 - List all genres'
-  puts '6 - List all labels'
-  puts '7 - List all authors'
-  puts '8 - List all sources'
-  puts '9 - Add a book'
-  puts '10 - Add a music album'
-  puts '11 - Add a movie'
-  puts '12 - Add a game'
-  puts '13 - Exit'
+  puts '3 - list all games'
+  puts '4 - List all genres'
+  puts '5 - List all labels'
+  puts '6 - List all authors'
+  puts '7 - Add a book'
+  puts '8 - Add a music album'
+  puts '9 - Add a game'
+  puts '10 - Exit'
   gets.chomp
 end
 

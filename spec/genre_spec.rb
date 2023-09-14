@@ -11,7 +11,7 @@ RSpec.describe Genre do
   describe '#add_item' do
     it 'adds an item to the genre' do
       genre = Genre.new('Adventure')
-      item = Item.new('Example Genre', 'Example Author', 'Example Source', 'Example Label')
+      item = Item.new('Example Label')
       expect(item).to receive(:genre=).with(genre)
       genre.add_item(item)
       expect(genre.instance_variable_get(:@items)).to include(item)

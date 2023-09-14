@@ -1,0 +1,22 @@
+[
+  {
+    "publisher": "manzi",
+    "cover_state": "bad"
+  },
+  {
+    "publisher": "kamran ",
+    "cover_state": "good"
+  },
+  {
+    "publisher": "manzi",
+    "cover_state": "bad"
+  },
+  {
+    "publisher": "Kamran",
+    "cover_state": "ABC"
+  },
+  {
+    "publisher": "publisher 1",
+    "cover_state": "cover 1"
+  }
+]

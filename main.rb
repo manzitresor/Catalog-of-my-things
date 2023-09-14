@@ -1,38 +1,27 @@
 require_relative 'app'
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/MethodLength
 def main
   app = App.new
   app.display_data
-  response = nil
-  while response != '13'
-    response = prompter
+  loop do
+    prompter
+    response = gets.chomp.to_i
+    responses = {
+      1 => -> { app.list_all_books }, 2 => -> { app.list_all_music_album }, 3 => -> { app.list_all_games },
+      4 => -> { app.list_all_genres },
+      5 => -> { app.list_all_labels },
+      6 => -> { app.list_all_authors },
+      7 => -> { app.add_book },
+      8 => -> { app.add_music_album },
+      9 => -> { app.add_game },
+      10 => -> { app.exit_app }
+    }
     case response
-    when '1'
-      app.list_all_books
-    when '2'
-      app.list_all_music_album
-    when '3'
-      app.list_all_games
-    when '4'
-      app.list_all_genres
-    when '5'
-      app.list_all_labels
-    when '6'
-      app.list_all_authors
-    when '7'
-      app.add_a_book
-    when '8'
-      app.add_a_music_album
-    when '9'
-      app.add_a_game
-    when '10' then app.exit_app
+    when 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+      responses[response].call
     end
   end
 end
 
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/MethodLength
 def prompter
   puts ' '
   puts 'Welcome to Catalog App!'
@@ -47,7 +36,6 @@ def prompter
   puts '8 - Add a music album'
   puts '9 - Add a game'
   puts '10 - Exit'
-  gets.chomp
 end
 
 main

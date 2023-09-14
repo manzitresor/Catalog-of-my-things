@@ -2,16 +2,10 @@ require_relative 'app_helper'
 require 'json'
 class App
   def initialize
-    @books = []
-    @labels = []
-    @authors = []
-    @games = []
-    @music_albums = []
-    @genres = []
+    @books, @labels, @authors, @games, @music_albums, @genres = []
   end
 
-  # rubocop:disable Metrics/MethodLength
-  def display_data
+  def display_book_data
     books = FileReader.new('./data/books.json').read
     labels = FileReader.new('./data/labels.json').read
     books.each do |book|
@@ -20,6 +14,10 @@ class App
     labels.each do |label|
       @labels.push(Label.new(label['title'], label['color']))
     end
+  end
+
+  def display_data
+    display_book_data
     authors = FileReader.new('./data/authors.json').read
     games = FileReader.new('./data/games.json').read
     games.each do |game|
@@ -38,7 +36,6 @@ class App
     end
   end
 
-  # rubocop:enable Metrics/MethodLength
   def preserve_data
     books = @books.map { |book| { publisher: book.publisher, cover_state: book.cover_state } }
     labels = @labels.map { |label| { title: label.title, color: label.color } }
@@ -79,7 +76,7 @@ class App
     end
   end
 
-  def add_a_book
+  def add_book
     print 'Publisher: '
     publisher = gets.chomp
     print 'Cover state: '
@@ -100,7 +97,7 @@ class App
     @labels.push(label)
   end
 
-  def add_a_music_album
+  def add_music_album
     print 'Enter music album title: '
     title = gets.chomp
 
@@ -127,7 +124,7 @@ class App
     @genres << genre_data
   end
 
-  def add_a_game
+  def add_game
     print 'Is the game a multiplayer game? (yes or no):'
     input = gets.chomp
     multiplayer = input.downcase == 'yes'

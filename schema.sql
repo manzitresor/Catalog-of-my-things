@@ -19,8 +19,10 @@ CREATE TABLE games(
  CREATE TABLE author(id INT GENERATED ALWAYS AS IDENTITY, first_name VARCHAR(250), last_name VARCHAR(250), PRIMARY KEY (id));
 
 CREATE TABLE Book(
+id INT GENERATED ALWAYS AS IDENTITY,
 publisher VARCHAR(50),
 cover_state VARCHAR(50)
+FOREIGN KEY(id) REFERENCES Item(id)
 );
 
 CREATE TABLE Label(
@@ -28,6 +30,7 @@ id INT GENERATED ALWAYS AS IDENTITY,
 title VARCHAR(50),
 color VARCHAR(50)
 PRIMARY KEY(id)
+FOREIGN KEY(id) REFERENCES Item(id)
 );
 
 CREATE TABLE Genres (
@@ -57,3 +60,5 @@ CREATE TABLE MusicAlbum (
 
 CREATE INDEX musicalbum_index_item_id ON MusicAlbum(item_id)
 CREATE INDEX items_genre_index_id ON MusicAlbum(genre_id)
+CREATE INDEX label_index_id ON Label(id)
+CREATE INDEX book_index_id ON Book(id)

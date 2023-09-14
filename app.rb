@@ -1,5 +1,6 @@
 require_relative 'app_helper'
 require 'json'
+
 class App
   def initialize
     @books = []
@@ -20,8 +21,6 @@ class App
     labels.each do |label|
       @labels.push(Label.new(label['title'], label['color']))
     end
-
-    # Display authors and games
     authors = FileReader.new('./data/authors.json').read
     games = FileReader.new('./data/games.json').read
     games.each do |game|
@@ -30,12 +29,10 @@ class App
     authors.each do |author|
       @authors.push(Author.new(author['first_name'], author['last_name']))
     end
-
-    # Display musicalbun and genre
     musicalbum = FileReader.new('./data/musicalbum.json').read
     genre_data = FileReader.new('./data/genre.json').read
     musicalbum.each do |music|
-      @music_albums.push(MusicAlbum.new(music['publish_date'], music['on_spotify'],music['title'],music['artist']))
+      @music_albums.push(MusicAlbum.new(music['publish_date'], music['on_spotify'], music['title'], music['artist']))
     end
     genre_data.each do |genre|
       @genres.push(Genre.new(genre['name']))
@@ -47,19 +44,26 @@ class App
     labels = @labels.map { |label| { title: label.title, color: label.color } }
     FileWriter.new('./data/books.json').write(books)
     FileWriter.new('./data/labels.json').write(labels)
-    # preserve author and game data
     games = @games.map { |game| { multiplayer: game.multiplayer, last_played_at: game.last_played_at } }
     authors = @authors.map { |author| { first_name: author.first_name, last_name: author.last_name } }
     FileWriter.new('./data/authors.json').write(authors)
     FileWriter.new('./data/games.json').write(games)
-
-    #preserve musicAlbum and genre data
-    music_album = @music_albums.map { |music| {publish_date: music.publish_date, on_spotify: music.on_spotify, title: music.title, artist: music.artist} }
-    genre = @genres.map { |genre| { id: genre.id, name: genre.name } }
+   
+  end
+  def preserve_music
+    music_album = @music_albums.map do |music|
+      {
+        publish_date: music.publish_date,
+        on_spotify: music.on_spotify,
+        title: music.title,
+        artist: music.artist
+      }
+    end
+    genre = @genres.map { |g| { id: g.id, name: g.name } }
     FileWriter.new('./data/musicalbum.json').write(music_album)
     FileWriter.new('./data/genre.json').write(genre)
   end
-
+  
   def list_all_books
     @books.each do |book|
       puts "Pubisher: #{book.publisher}, Cover State: #{book.cover_state}"

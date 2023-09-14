@@ -4,5 +4,11 @@
     "on_spotify": false,
     "title": "ABC",
     "artist": "AA"
+  },
+  {
+    "publish_date": "2023-09-12",
+    "on_spotify": true,
+    "title": "Rockstart",
+    "artist": "Manzi"
   }
 ]

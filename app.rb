@@ -48,6 +48,16 @@ class App
     authors = @authors.map { |author| { first_name: author.first_name, last_name: author.last_name } }
     FileWriter.new('./data/authors.json').write(authors)
     FileWriter.new('./data/games.json').write(games)
+    album = @music_albums.map do |m|
+      {
+        publish_date: m.publish_date,
+        on_spotify: m.on_spotify,
+        title: m.title, artist: m.artist
+      }
+    end
+    genre = @genres.map { |g| { id: g.id, name: g.name } }
+    FileWriter.new('./data/musicalbum.json').write(album)
+    FileWriter.new('./data/genre.json').write(genre)
   end
 
   def list_all_books

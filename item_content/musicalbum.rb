@@ -15,7 +15,7 @@ class MusicAlbum < Item
 
   private
 
-  def can_be_archieved?()
+  def can_be_archieved?
     parent_can_be_archived = super
     parent_can_be_archived && @on_spotify
   end

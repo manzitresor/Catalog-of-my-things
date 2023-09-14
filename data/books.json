@@ -14,5 +14,9 @@
   {
     "publisher": "Kamran",
     "cover_state": "ABC"
+  },
+  {
+    "publisher": "publisher 1",
+    "cover_state": "cover 1"
   }
 ]

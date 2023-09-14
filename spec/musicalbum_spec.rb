@@ -23,6 +23,4 @@ RSpec.describe MusicAlbum do
       expect(music_album1.id).not_to eq(music_album2.id)
     end
   end
-
-  
 end

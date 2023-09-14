@@ -18,6 +18,8 @@ CREATE TABLE games(
 
  CREATE TABLE author(id INT GENERATED ALWAYS AS IDENTITY, first_name VARCHAR(250), last_name VARCHAR(250), PRIMARY KEY (id));
 
+CREATE INDEX idx_author_id ON games(author_id);
+
 CREATE TABLE Book(
 publisher VARCHAR(50),
 cover_state VARCHAR(50)

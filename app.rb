@@ -1,6 +1,5 @@
 require_relative 'app_helper'
 require 'json'
-
 class App
   def initialize
     @books = []
@@ -11,10 +10,10 @@ class App
     @genres = []
   end
 
+  # rubocop:disable Metrics/MethodLength
   def display_data
     books = FileReader.new('./data/books.json').read
     labels = FileReader.new('./data/labels.json').read
-
     books.each do |book|
       @books.push(Book.new(book['publisher'], book['cover_state']))
     end
@@ -39,6 +38,7 @@ class App
     end
   end
 
+  # rubocop:enable Metrics/MethodLength
   def preserve_data
     books = @books.map { |book| { publisher: book.publisher, cover_state: book.cover_state } }
     labels = @labels.map { |label| { title: label.title, color: label.color } }
@@ -48,22 +48,8 @@ class App
     authors = @authors.map { |author| { first_name: author.first_name, last_name: author.last_name } }
     FileWriter.new('./data/authors.json').write(authors)
     FileWriter.new('./data/games.json').write(games)
-   
   end
-  def preserve_music
-    music_album = @music_albums.map do |music|
-      {
-        publish_date: music.publish_date,
-        on_spotify: music.on_spotify,
-        title: music.title,
-        artist: music.artist
-      }
-    end
-    genre = @genres.map { |g| { id: g.id, name: g.name } }
-    FileWriter.new('./data/musicalbum.json').write(music_album)
-    FileWriter.new('./data/genre.json').write(genre)
-  end
-  
+
   def list_all_books
     @books.each do |book|
       puts "Pubisher: #{book.publisher}, Cover State: #{book.cover_state}"
